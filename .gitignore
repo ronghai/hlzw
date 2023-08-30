@@ -10,7 +10,9 @@ target/
 .project
 .settings
 .springBeans
-
+**/__pycache__/**
+__pycache__/**/**
+**/**/__pycache__/**/**
 ### IntelliJ IDEA ###
 .idea
 *.iws
