@@ -1,0 +1,33 @@
+{% extends "essays/base.html" %}
+
+{% block pagetitle %}
+{{ essay.subject }}
+{% endblock pagetitle %}
+
+{% block content %}
+   <style>
+     
+     .indent {
+        text-indent: 2em;
+        margin-bottom: 0;
+        line-height: 28px;
+    }
+
+   </style>
+    <div class='main-container'>
+      <p style='font-size: 16pt;font-family: 宋体; text-align:center; font-weight:bold;'>{{ essay.subject }}</p>
+      <p style="font-size: 14pt;  font-family: '楷体'; text-align: right; font-weight:bold;">{{ essay.student_no }}号 {{ essay.student_name }}</p>
+      {% autoescape off %}
+        {{ essay.context_p }}
+      {% endautoescape %}
+    
+      <a class="btn btn btn-primary" href="{% url 'essays:update' essay.uuid %}">修改</a>
+      <a class="btn btn btn-secondary" href="{% url 'essays:download' essay.uuid 'docx' %}">下载</a>
+      <form method="post" action="{% url 'essays:delete' essay.uuid %}" style='display: inline;'>
+        {% csrf_token %}
+        <button class="btn btn btn-danger " type="submit">删除</button>
+      </form>
+    </div> 
+
+
+{% endblock content %}

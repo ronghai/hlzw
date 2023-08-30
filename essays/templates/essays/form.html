@@ -1,0 +1,20 @@
+
+
+{% extends "essays/base.html" %}
+
+{% block pagetitle %}
+  {{ title }}
+{% endblock pagetitle %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class='main-container'>
+  <form method="post" class="form">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button name="submit" class="btn btn-primary" type="submit" value="新增习作" >新增习作</button>
+  </form>
+</div>
+
+{% endblock content %}
+

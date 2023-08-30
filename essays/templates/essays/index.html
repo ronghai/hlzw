@@ -1,0 +1,40 @@
+{% extends "essays/base.html" %}
+
+{% block pagetitle %}
+习作列表
+{% endblock pagetitle %}
+
+{% block content %}
+    
+    
+    {% if all_essays %}
+    <div class='main-container'>
+        <h3>习作列表</h3>
+        <p style='text-align: right;'>
+            <a class="btn btn-sm btn-secondary "  href="{% url 'essays:dbc' %}?category={{category}}">下载{{category}}</a>
+        </p>
+        {% for essay in all_essays %}
+        <div class="row" >
+            <div class="col-3">{{ essay.category }}</div>
+            <div class="col-6">
+                <a href="{% url 'essays:essay' essay.uuid %}">
+                    {{essay.student_no}} 号 {{essay.student_name}} {{essay.subject}}
+                </a>
+            </div>
+            <div class="col-3">
+                <a class="btn btn-sm btn-secondary "  href="{% url 'essays:download' essay.uuid 'docx' %}">下载</a>
+            <!--
+                <form method="post" action="{% url 'essays:delete' essay.uuid %}" style='display: inline;'>
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-danger " type="submit">删除</button>
+                </form>
+            -->
+            </div>
+        </div>
+        
+        {% endfor %}
+    </div>
+    {% else %}
+    <h1>没有文章</h1>
+    {% endif %}
+{% endblock content %}
